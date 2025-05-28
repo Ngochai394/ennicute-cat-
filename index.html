@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<title>Ennicute - Game mèo cute 2D</title>
+<style>
+  body {
+    margin: 0;
+    background: #fdf6e3;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  h1 {
+    color: #333;
+  }
+  #score {
+    font-size: 24px;
+    margin: 10px 0 20px;
+    color: #555;
+  }
+  #gameArea {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    background: #ace7ef;
+    border: 3px solid #555;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  #cat {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 160px;
+    top: 210px;
+    cursor: pointer;
+    user-select: none;
+    transition: top 0.2s ease;
+  }
+</style>
+</head>
+<body>
+
+<h1>Ennicute 🐱</h1>
+<div id="score">Điểm: 0</div>
+<div id="gameArea">
+  <img id="cat" src="https://i.imgur.com/JbLQsnZ.png" alt="Mèo Ennicute" />
+</div>
+
+<script>
+  const cat = document.getElementById('cat');
+  const scoreDisplay = document.getElementById('score');
+  let score = 0;
+  let isJumping = false;
+
+  function jump() {
+    if (isJumping) return;
+    isJumping = true;
+    let jumpHeight = 150;
+    let duration = 300;
+    // Mèo nhảy lên
+    cat.style.top = (parseInt(cat.style.top) - jumpHeight) + "px";
+    setTimeout(() => {
+      // Mèo rơi xuống
+      cat.style.top = (parseInt(cat.style.top) + jumpHeight) + "px";
+      isJumping = false;
+    }, duration);
+    score++;
+    scoreDisplay.textContent = "Điểm: " + score;
+  }
+
+  cat.addEventListener('click', jump);
+</script>
+
+</body>
+</html>
